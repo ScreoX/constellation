@@ -26,6 +26,7 @@ protected:
     int maxSignalPoints;
     double maxXmlCord;
     const double averageMaximumBinaryValue = 9000.0;
+    const QString binaryFile;
 
 private:
     void updateGraph();

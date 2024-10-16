@@ -10,7 +10,7 @@ PlotWidget::PlotWidget(QWidget *parent) : QWidget(parent), maxSignalPoints(16000
     
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &PlotWidget::updateGraph);
-    timer->start(10000);
+    timer->start(100);
 }
 
 void PlotWidget::readXmlFile(const QString &inputXmlFile) {

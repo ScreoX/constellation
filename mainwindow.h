@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QFileDialog>
+#include <QMessageBox>
 #include "graph.h"
 
 class MainWindow : public QMainWindow {
@@ -10,10 +14,19 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
-    void readFiles(const QString &inputXmlFile, const QString &inputBinFile);
+    void readXmlFile(const QString &inputXmlFile);
+    void readBinaryFile(const QString &inputBinFile);
 
 private:
+    void selectXmlFile();
+    void selectBinaryFile();
+
     PlotWidget *plotWidget;
+    QVBoxLayout *layout;
+    QWidget *centralWidget;
+
+    QPushButton *buttonForXml;
+    QPushButton *buttonForBin;
 };
 
 #endif
