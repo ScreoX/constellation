@@ -21,12 +21,12 @@ private:
     void selectXmlFile();
     void selectBinaryFile();
 
-    PlotWidget *plotWidget;
-    QVBoxLayout *layout;
-    QWidget *centralWidget;
+    PlotWidget *m_plotWidget;
+    QVBoxLayout *m_layout;
+    QWidget *m_centralWidget;
 
-    QPushButton *buttonForXml;
-    QPushButton *buttonForBin;
+    QPushButton *m_buttonForXml;
+    QPushButton *m_buttonForBin;
 };
 
 #endif

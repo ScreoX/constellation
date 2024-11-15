@@ -1,22 +1,22 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), plotWidget(new PlotWidget(this)) {
-    centralWidget = new QWidget(this);
-    setCentralWidget(centralWidget);
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), m_plotWidget(new PlotWidget(this)) {
+    m_centralWidget = new QWidget(this);
+    setCentralWidget(m_centralWidget);
 
-    buttonForXml = new QPushButton("Выбрать XML файл", this);
+    m_buttonForXml = new QPushButton("Выбрать XML файл", this);
 
-    layout = new QVBoxLayout(centralWidget);
-    layout->addWidget(buttonForXml);
-    layout->addWidget(plotWidget);
+    m_layout = new QVBoxLayout(m_centralWidget);
+    m_layout->addWidget(m_buttonForXml);
+    m_layout->addWidget(m_plotWidget);
 
-    connect(buttonForXml, &QPushButton::clicked, this, &MainWindow::selectXmlFile);
+    connect(m_buttonForXml, &QPushButton::clicked, this, &MainWindow::selectXmlFile);
 
-    buttonForBin = new QPushButton("Выбрать Binary файл", this);
-    buttonForBin->hide();
-    layout->addWidget(buttonForBin);
+    m_buttonForBin = new QPushButton("Выбрать Binary файл", this);
+    m_buttonForBin->hide();
+    m_layout->addWidget(m_buttonForBin);
 
-    connect(buttonForBin, &QPushButton::clicked, this, &MainWindow::selectBinaryFile);
+    connect(m_buttonForBin, &QPushButton::clicked, this, &MainWindow::selectBinaryFile);
 
     setWindowTitle("Constellation");
     resize(800, 800);
@@ -25,26 +25,26 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), plotWidget(new Pl
 MainWindow::~MainWindow() = default;
 
 void MainWindow::readXmlFile(const QString &inputXmlFile) {
-    plotWidget->readXmlFile(inputXmlFile);
+    m_plotWidget->readXmlFile(inputXmlFile);
 }
 
 void MainWindow::readBinaryFile(const QString &inputBinFile) {
-    plotWidget->readBinaryFile(inputBinFile);
+    m_plotWidget->readBinaryFile(inputBinFile);
 }
 
 void MainWindow::selectBinaryFile() {
-    QString BinFile = QFileDialog::getOpenFileName(this, tr("Выберите binary файл"), "", tr("Bin Files (*.bin)"));
+    QString BinFile = QFileDialog::getOpenFileName(this, tr("Выберите binary файл"), "", tr("Bin FilesWithInputCoordinates (*.bin)"));
     if (!BinFile.isEmpty()) {
         readBinaryFile(BinFile);
-        buttonForBin->hide();
+        m_buttonForBin->hide();
     }
 }
 
 void MainWindow::selectXmlFile() {
-    QString XmlFile = QFileDialog::getOpenFileName(this, tr("Выберите xml файл"), "", tr("XML Files (*.xml)"));
+    QString XmlFile = QFileDialog::getOpenFileName(this, tr("Выберите xml файл"), "", tr("XML FilesWithInputCoordinates (*.xml)"));
     if (!XmlFile.isEmpty()) {
         readXmlFile(XmlFile);
-        buttonForXml->hide();
-        buttonForBin->show();
+        m_buttonForXml->hide();
+        m_buttonForBin->show();
     }
 }
